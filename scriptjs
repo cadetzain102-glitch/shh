@@ -1,0 +1,28 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+    // SCROLL BUTTON
+    const scrollBtn = document.getElementById("scrollBtn");
+    const contentSection = document.getElementById("mainContent");
+
+    scrollBtn.addEventListener("click", function () {
+        const topPos = contentSection.getBoundingClientRect().top + window.pageYOffset - 50;
+        window.scrollTo({ top: topPos, behavior: "smooth" });
+    });
+
+    // SCROLL REVEAL ANIMATION
+    const elements = document.querySelectorAll(".glass p, .glass li, .glass ol li");
+    elements.forEach(el => el.classList.add("fade-element"));
+
+    function revealOnScroll() {
+        elements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            if (elementTop < windowHeight - 50) {
+                el.classList.add("show");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+});
